@@ -23,8 +23,12 @@ def depuration(X_train, y_train, k, k_prim):
     Returns:
         two lists: list with edited training set and list with labels
     """
+    if not isinstance(k, int):
+        raise TypeError('k should be an integer greater than 0')
     if k < 1:
-        raise ValueError('k should be integer greater than 0')
+        raise ValueError('k should be an integer greater than 0')
+    if not isinstance(k_prim, int):
+        raise TypeError('k_prim should be an integer greater than 0')
     if k_prim > k or k_prim < (k+1)/2:
         raise ValueError('k_prim should be in range [(k+1)/2, k]')
     Sx = []
