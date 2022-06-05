@@ -11,18 +11,32 @@ def depuration(X_train, y_train, k, k_prim):
     such neighbors, discard this the item from training set.
 
     Args:
-        X_train (array): training set
-        y_train (array): labels for training set
+        X_train (2D numpy array): training set
+        y_train (1D numpy array): labels for training set
         k (int): number of neighbors
         k_prim (int): number of minimum neighbors with the same label
 
     Raises:
+        TypeError: X_train should be of type numpy array
+        ValueError: X_train should be a 2D numpy array
+        TypeError: y_train should be of type numpy array
+        ValueError: y_train should be a 1D numpy array
+        TypeError: k should be an integer greater than 0
         ValueError: k should be integer greater than 0
+        TypeError: k_prim should be an integer greater than 0
         ValueError: k_prim should be in range [(k+1)/2, k]
 
     Returns:
-        two lists: list with edited training set and list with labels
+        two lists: 2D list with edited training set and 1D list with labels
     """
+    if type(X_train).__module__ != np.__name__:
+        raise TypeError('X_train should be of type numpy array')
+    if X_train.ndim != 2:
+        raise ValueError('X_train should be a 2D numpy array')
+    if type(y_train).__module__ != np.__name__:
+        raise TypeError('y_train should be of type numpy array')
+    if y_train.ndim != 1:
+        raise ValueError('y_train should be a 1D numpy array')
     if not isinstance(k, int):
         raise TypeError('k should be an integer greater than 0')
     if k < 1:
@@ -53,12 +67,26 @@ def kncn_edit(X_train, y_train):
     is the same as the original label o this item.
 
     Args:
-        X_train (array): training set
-        y_train (array): labels for training set
+        X_train (2D numpy array): training set
+        y_train (1D numpy array): labels for training set
+
+    Raises:
+        TypeError: X_train should be of type numpy array
+        ValueError: X_train should be a 2D numpy array
+        TypeError: y_train should be of type numpy array
+        ValueError: y_train should be a 1D numpy array
 
     Returns:
-        two lists: list with edited training set and list with labels
+        two lists: 2D list with edited training set and 1D list with labels
     """
+    if type(X_train).__module__ != np.__name__:
+        raise TypeError('X_train should be of type numpy array')
+    if X_train.ndim != 2:
+        raise ValueError('X_train should be a 2D numpy array')
+    if type(y_train).__module__ != np.__name__:
+        raise TypeError('y_train should be of type numpy array')
+    if y_train.ndim != 1:
+        raise ValueError('y_train should be a 1D numpy array')
     n = len(y_train)
     Sx = []
     Sy = []
@@ -101,16 +129,16 @@ def iterative_kncn_edit(X_train, y_train):
     (the training set becomes smaller each iteration).
 
     Args:
-        X_train (array): training set
-        y_train (array): labels for training set
+        X_train (2D numpy array): training set
+        y_train (1D numpy array): labels for training set
 
     Returns:
-        two lists: list with edited training set and list with labels
+        two lists: 2D list with edited training set and 1D list with labels
     """
     X_train_new, y_train_new = kncn_edit(X_train, y_train)
     while len(X_train_new) != len(X_train):
         X_train = deepcopy(X_train_new)
         y_train = deepcopy(y_train_new)
-        X_train_new, y_train_new = kncn_edit(X_train, y_train)
+        X_train_new, y_train_new = kncn_edit(np.array(X_train), np.array(y_train))
 
     return X_train_new, y_train_new
