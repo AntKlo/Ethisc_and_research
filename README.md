@@ -1,5 +1,5 @@
-# Methods for obtaining quality training set.
-Implementation of three methods stated in http://sci2s.ugr.es/keel/pdf/algorithm/articulo/2003-Sanchez-PRL.pdf. These methods are designed to obtain quality training set. Thanks to this, especially in case of a dataset with outliers or with mislabbeled samples, classification model is able to obtain better final accuracy.
+## Methods for obtaining quality training set
+#### Implementation of three methods stated in http://sci2s.ugr.es/keel/pdf/algorithm/articulo/2003-Sanchez-PRL.pdf. These methods are designed to obtain quality training set. Thanks to this, especially in case of a dataset with outliers or with mislabbeled samples, classification model is able to obtain better final accuracy.
 
 ### Depuration
 Depuration function examines training set and for every item in it checks if the item has at least k_prim nearest neighbors with the label the same as the original label of this item. If there is no enough such neighbors, discard this the item from training set.
