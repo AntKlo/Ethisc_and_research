@@ -6,7 +6,7 @@ from copy import deepcopy
 
 def depuration(X_train, y_train, k, k_prim):
     """Depuration function examines training set and for every item in it
-    it checks if the item has at least k_prim neighbors with the label
+    checks if the item has at least k_prim nearest neighbors with the label
     the same as the original label of this item. If there is no enough
     such neighbors, discard this the item from training set.
 
@@ -62,9 +62,9 @@ def depuration(X_train, y_train, k, k_prim):
 
 def kncn_edit(X_train, y_train):
     """kncn_edit function examines training set and for every item in it
-    it checks if the prediction for this item, using k nearest centroids method
+    checks if the prediction for this item, using k nearest centroids method
     (centroid space created with the rest items in the training set),
-    is the same as the original label o this item.
+    is the same as the original label of this item.
 
     Args:
         X_train (2D numpy array): training set
